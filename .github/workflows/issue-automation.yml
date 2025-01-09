@@ -11,8 +11,12 @@ jobs:
 
     steps:
       - name: Comment on the opened issue
-        run: |
-          curl -X POST \
-          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-          -d '{"body": "Thanks for opening this issue! We will look into it shortly."}' \
-          "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments"
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: 'Thanks for opening this issue! We will look into it shortly.'
+            })
