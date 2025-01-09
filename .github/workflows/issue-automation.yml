@@ -17,14 +17,14 @@ jobs:
             const issueTitle = context.payload.issue.title.toLowerCase();
             const issueBody = context.payload.issue.body ? context.payload.issue.body.toLowerCase() : "";
 
-            // Define keywords for classification
-            const featureKeywords = ["feature request","feature", "request", "enhancement", "idea"];
-            const bugKeywords = ["bug", "error", "issue", "problem", "fail"];
+            const labels = context.payload.issue.labels.map(label => label.name.toLowerCase());
 
-            // Determine the type of issue
+            const featureKeywords = ["feature request"];
+            const bugKeywords = ["bug"];
+
             let commentBody = "";
 
-            if (featureKeywords.some(word => issueTitle.includes(word) || issueBody.includes(word))) {
+            if (labels.some(label => featureKeywords.includes(label))) {
               commentBody = [
                 "✨ Thank you for suggesting a feature! 🚀\n",
                 "\nWe’re excited to hear your ideas for improving **Kando**! Here are a few things to keep in mind when submitting a feature request:\n",
@@ -34,7 +34,7 @@ jobs:
                 "\nOur team will review your request and evaluate how it aligns with our development plans. Stay tuned for updates, and thanks for contributing to the growth of Kando! 🎉\n",
                 "\n*(Learn more about Kando at [kando.menu](https://kando.menu))*"
               ].join('');
-            } else if (bugKeywords.some(word => issueTitle.includes(word) || issueBody.includes(word))) {
+            } else if (labels.some(label => bugKeywords.includes(label))) {
               commentBody = [
                 "👋 Hi there! Thanks for opening an issue!\n",
                 "\nHave you checked out what **Kando** is all about? 🎮🖱️ It's a unique and efficient way to interact with your computer using pie menus inspired by Fitts’s Law. Whether you're launching apps, opening files, or using keyboard shortcuts, Kando makes it fast and fun! 🚀\n",
@@ -57,5 +57,5 @@ jobs:
               });
               console.log(`Comment added to issue #${context.issue.number}`);
             } else {
-              console.log(`No keywords matched for issue #${context.issue.number}. No comment added.`);
+              console.log(`No matching labels for issue #${context.issue.number}. No comment added.`);
             }
