@@ -1,0 +1,59 @@
+name: Issue Automation and Solutions Suggestion
+
+on:
+  issues:
+    types:
+      - opened
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  suggest_solutions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Find similar issues and suggest solutions
+        run: |
+          ISSUE_TITLE="${{ github.event.issue.title }}"
+          ISSUE_BODY="${{ github.event.issue.body }}"
+          
+          # Search for similar issues
+          RESPONSE=$(curl -s -X GET \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/search/issues?q=${ISSUE_TITLE}+in:title+repo:${{ github.repository }}")
+
+          SIMILAR_ISSUES=$(echo $RESPONSE | jq -r '.items[0:5] | map("Title: \(.title) | URL: \(.html_url)") | join("\n")')
+
+          if [ -z "$SIMILAR_ISSUES" ]; then
+            echo "No similar issues found"
+            exit 1
+          fi
+
+          COMMENT_BODY="### Possible solutions to your issue:\n\n$SIMILAR_ISSUES\n\nPlease check if any of these solutions address your problem.\n\nIf none of these work, please reply with 'None of these solutions work for me'."
+
+          # Post a comment with suggested solutions
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d "{\"body\": \"$COMMENT_BODY\"}" \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments"
+        
+  handle_no_solution_response:
+    if: ${{ github.event.issue.body == 'None of these solutions work for me' }}
+    runs-on: ubuntu-latest
+    needs: suggest_solutions
+
+    steps:
+      - name: Label issue as requiring investigation
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{"labels":["needs investigation"]}' \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels"
+
+      - name: Close the issue or trigger other actions
+        run: |
+          curl -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{"state": "closed"}' \
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}"
