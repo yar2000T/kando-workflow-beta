@@ -1,1 +1,1 @@
-Test repo for workloads
+Test repository for workloads
