@@ -18,7 +18,7 @@ jobs:
             const issueBody = context.payload.issue.body ? context.payload.issue.body.toLowerCase() : "";
 
             // Define keywords for classification
-            const featureKeywords = ["feature request", feature", "request", "enhancement", "idea"];
+            const featureKeywords = ["feature request","feature", "request", "enhancement", "idea"];
             const bugKeywords = ["bug", "error", "issue", "problem", "fail"];
 
             // Determine the type of issue
@@ -37,13 +37,14 @@ jobs:
             } else if (bugKeywords.some(word => issueTitle.includes(word) || issueBody.includes(word))) {
               commentBody = [
                 "👋 Hi there! Thanks for opening an issue!\n",
-                "\nWe appreciate you taking the time to report this bug. Bugs help us improve **Kando** and make it better for everyone! 🚀\n",
-                "\nHere are a few tips for reporting a bug effectively:\n",
-                "- Describe the issue clearly, including steps to reproduce it.\n",
-                "- Mention the version of **Kando** you are using and your operating system.\n",
-                "- Include screenshots or error logs if applicable.\n",
-                "\nOur team will investigate the issue and update you as soon as possible. Thanks for your patience and support! 😊\n",
-                "\n*(Learn more about Kando at [kando.menu](https://kando.menu))*"
+                "\nHave you checked out what **Kando** is all about? 🎮🖱️ It's a unique and efficient way to interact with your computer using pie menus inspired by Fitts’s Law. Whether you're launching apps, opening files, or using keyboard shortcuts, Kando makes it fast and fun! 🚀\n",
+                "\nIf you're new to Kando, here are some quick tips:\n",
+                "- **What makes Kando efficient?** It's all about minimizing the distance and maximizing the size of targets with intuitive pie menus.\n",
+                "- **How to navigate Kando?** You can click anywhere in a wedge or draw zig-zag lines for rapid submenu selection.\n",
+                "- **Best for input devices:** Kando works great with a mouse, stylus, touch, or controller.\n",
+                "\nNeed help? Join the community on our Discord server for guidance and support!\n",
+                "\nHappy Kando-ing! 🎉\n",
+                "*(Learn more at [kando.menu](https://kando.menu))*"
               ].join('');
             }
 
