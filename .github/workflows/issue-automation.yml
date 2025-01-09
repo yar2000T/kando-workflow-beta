@@ -18,7 +18,7 @@ jobs:
             const issueBody = context.payload.issue.body ? context.payload.issue.body.toLowerCase() : "";
 
             // Define keywords for classification
-            const featureKeywords = ["feature", "request", "enhancement", "idea"];
+            const featureKeywords = ["feature request", feature", "request", "enhancement", "idea"];
             const bugKeywords = ["bug", "error", "issue", "problem", "fail"];
 
             // Determine the type of issue
