@@ -1,0 +1,13 @@
+name: Message on PR Creation
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  pr_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send PR message
+        run: |
+          echo "Hello @${{ github.actor }}! You've opened a pull request. Please ensure that all tests pass!"
