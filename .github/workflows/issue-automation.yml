@@ -18,5 +18,16 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: 'Thanks for opening this issue! We will look into it shortly.'
+              body: `👋 Hi there! Thanks for opening an issue!
+
+Have you checked out what **Kando** is all about? 🎮🖱️ It's a unique and efficient way to interact with your computer using pie menus inspired by Fitts’s Law. Whether you're launching apps, opening files, or using keyboard shortcuts, Kando makes it fast and fun! 🚀
+
+If you're new to Kando, here are some quick tips:
+- **What makes Kando efficient?** It's all about minimizing the distance and maximizing the size of targets with intuitive pie menus.
+- **How to navigate Kando?** You can click anywhere in a wedge or draw zig-zag lines for rapid submenu selection.
+- **Best for input devices:** Kando works great with a mouse, stylus, touch, or controller.
+
+Need help? Join the community on our Discord server for guidance and support!
+
+*(Learn more at [kando.menu](https://kando.menu))*`
             })
