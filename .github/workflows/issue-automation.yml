@@ -1,0 +1,21 @@
+name: Issue Automation
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  comment_on_issue:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Comment on the opened issue
+        uses: peter-evans/comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Thanks for opening this issue! We'll look into it shortly.
