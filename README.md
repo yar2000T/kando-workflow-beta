@@ -1,1 +1,1 @@
-Test repository for workloads. Simon!
+Test repository for workloads
