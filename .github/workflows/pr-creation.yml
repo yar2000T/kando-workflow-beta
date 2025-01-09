@@ -16,5 +16,5 @@ jobs:
         run: |
           curl -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -d "{\"body\": \"Hello @${{ github.actor }}! Thank you for opening this pull request. You've opened a pull request. Please ensure that all tests pass!\"}" \
+            -d "{\"body\": \"Hello @${{ github.actor }}! Thank you for opening this pull request. Please ensure that all tests pass!\"}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
