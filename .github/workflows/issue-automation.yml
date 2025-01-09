@@ -43,7 +43,6 @@ jobs:
                 "- **How to navigate Kando?** You can click anywhere in a wedge or draw zig-zag lines for rapid submenu selection.\n",
                 "- **Best for input devices:** Kando works great with a mouse, stylus, touch, or controller.\n",
                 "\nNeed help? Join the community on our Discord server for guidance and support!\n",
-                "\nHappy Kando-ing! 🎉\n",
                 "*(Learn more at [kando.menu](https://kando.menu))*"
               ].join('');
             }
