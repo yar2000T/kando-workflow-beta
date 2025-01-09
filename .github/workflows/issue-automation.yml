@@ -25,22 +25,26 @@ jobs:
             let commentBody = "";
 
             if (featureKeywords.some(word => issueTitle.includes(word) || issueBody.includes(word))) {
-              commentBody = `✨ Thank you for suggesting a feature! 🚀\n\n\
-We’re excited to hear your ideas for improving **Kando**! Here are a few things to keep in mind when submitting a feature request:\n\
-- Please describe your idea in detail so we can better understand its value and purpose.\n\
-- Let us know how this feature will improve your experience or solve a problem.\n\
-- Feel free to include any examples, mockups, or use cases that can help clarify your request.\n\n\
-Our team will review your request and evaluate how it aligns with our development plans. Stay tuned for updates, and thanks for contributing to the growth of Kando! 🎉\n\n\
-*(Learn more about Kando at [kando.menu](https://kando.menu))*`;
+              commentBody = [
+                "✨ Thank you for suggesting a feature! 🚀\n",
+                "\nWe’re excited to hear your ideas for improving **Kando**! Here are a few things to keep in mind when submitting a feature request:\n",
+                "- Please describe your idea in detail so we can better understand its value and purpose.\n",
+                "- Let us know how this feature will improve your experience or solve a problem.\n",
+                "- Feel free to include any examples, mockups, or use cases that can help clarify your request.\n",
+                "\nOur team will review your request and evaluate how it aligns with our development plans. Stay tuned for updates, and thanks for contributing to the growth of Kando! 🎉\n",
+                "\n*(Learn more about Kando at [kando.menu](https://kando.menu))*"
+              ].join('');
             } else if (bugKeywords.some(word => issueTitle.includes(word) || issueBody.includes(word))) {
-              commentBody = `👋 Hi there! Thanks for opening an issue!\n\n\
-We appreciate you taking the time to report this bug. Bugs help us improve **Kando** and make it better for everyone! 🚀\n\n\
-Here are a few tips for reporting a bug effectively:\n\
-- Describe the issue clearly, including steps to reproduce it.\n\
-- Mention the version of **Kando** you are using and your operating system.\n\
-- Include screenshots or error logs if applicable.\n\n\
-Our team will investigate the issue and update you as soon as possible. Thanks for your patience and support! 😊\n\n\
-*(Learn more about Kando at [kando.menu](https://kando.menu))*`;
+              commentBody = [
+                "👋 Hi there! Thanks for opening an issue!\n",
+                "\nWe appreciate you taking the time to report this bug. Bugs help us improve **Kando** and make it better for everyone! 🚀\n",
+                "\nHere are a few tips for reporting a bug effectively:\n",
+                "- Describe the issue clearly, including steps to reproduce it.\n",
+                "- Mention the version of **Kando** you are using and your operating system.\n",
+                "- Include screenshots or error logs if applicable.\n",
+                "\nOur team will investigate the issue and update you as soon as possible. Thanks for your patience and support! 😊\n",
+                "\n*(Learn more about Kando at [kando.menu](https://kando.menu))*"
+              ].join('');
             }
 
             if (commentBody) {
